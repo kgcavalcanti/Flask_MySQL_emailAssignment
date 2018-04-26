@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+        <title>E-mails - Assignment</title>
+    </head>
+    <script>
+        
+
+    </script>
+    <body>
+        <div id="container">
+            <header class="header_footer">
+                <img src="{{ url_for('static', filename='Coding-Dojo-logo.png') }}">
+                <h1>Flask MySQL Assignment - E-mails</h1>
+            </header>
+            <main>
+               <div id="forms">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                          {% for message in messages %}
+                            <p>{{message}}</p>
+                          {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <h2>Email address entered</h2>
+                    <table>
+                        <thead>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Created at</th>
+                        </thead>
+                    {% for emails in list_emails: %}      
+                        <tr>
+                            <td>{{ emails['id'] }}</td>
+                            <td>{{ emails['email'] }}</td>
+                            <td>{{ emails['created_at'] }}</td>
+                        </tr>
+                    {% endfor %}  
+                     </table>
+                    <h2>Delete e-mails from the list</h2>               
+                    <form action='/delete' method="POST">
+                        <label for=id> ID: </label><input type="text" name="id">
+                        <input type="submit" value="Delete" name="delete" class="button">
+                    </form>
+                </div>
+                   
+            </main>
+            <footer class="header_footer">
+                <h3>Katia Cavalcanti</h3>
+            </footer>
+        </div>
+    </body>
+</html>
